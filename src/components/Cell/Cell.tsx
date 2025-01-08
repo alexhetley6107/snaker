@@ -1,7 +1,12 @@
 import { FC } from 'react';
 import s from './Cell.module.css';
-// type Props = {}
+import { CELL_TYPE } from '../../types';
 
-export const Cell: FC = () => {
-  return <div className={s.cell} />;
+type Props = {
+  type: CELL_TYPE;
+};
+
+export const Cell: FC<Props> = ({ type = CELL_TYPE.EMPTY }) => {
+  const className = `${s.cell} ${s[type]}`;
+  return <div className={className} />;
 };

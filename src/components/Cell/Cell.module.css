@@ -1,6 +1,17 @@
 .cell {
-  width: 40px;
-  height: 40px;
-  background-color: lightblue;
-  margin: 2px;
+  width: 20px;
+  height: 20px;
+  /* margin: 1px; */
+}
+
+.empty {
+  background-color: grey;
+}
+
+.snake {
+  background-color: lightgreen;
+}
+
+.food {
+  background-color: red;
 }
