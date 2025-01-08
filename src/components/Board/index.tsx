@@ -6,9 +6,11 @@ import { CELL_TYPE, DIRECTION, Position } from '../../types';
 
 type Props = {
   direction: DIRECTION;
+  addPoint: () => void;
+  stopGame: () => void;
 };
 
-export const Board: FC<Props> = ({ direction }) => {
+export const Board: FC<Props> = ({ direction, addPoint }) => {
   const [snake, setSnake] = useState<Position[]>(initialSnake);
   const [food, setFood] = useState<Position | null>(null);
 
@@ -73,6 +75,7 @@ export const Board: FC<Props> = ({ direction }) => {
       if (isEating) {
         spliceIndex = 0;
         generateFood();
+        addPoint();
       }
 
       setSnake(newSnake.splice(spliceIndex));
@@ -82,28 +85,25 @@ export const Board: FC<Props> = ({ direction }) => {
   };
 
   return (
-    <>
-      {direction}
-      <div className={s.row}>
-        {DEFAULT_CELLS.map((row, rowIndex) => {
-          return (
-            <div key={rowIndex}>
-              {row.map((_, colIndex) => {
-                let type = snake.some((c) => c[0] === rowIndex && c[1] === colIndex)
-                  ? CELL_TYPE.SNAKE
-                  : CELL_TYPE.EMPTY;
+    <div className={s.row}>
+      {DEFAULT_CELLS.map((row, rowIndex) => {
+        return (
+          <div key={rowIndex}>
+            {row.map((_, colIndex) => {
+              let type = snake.some((c) => c[0] === rowIndex && c[1] === colIndex)
+                ? CELL_TYPE.SNAKE
+                : CELL_TYPE.EMPTY;
 
-                const isFood =
-                  type !== CELL_TYPE.SNAKE && food?.[0] === rowIndex && food[1] === colIndex;
+              const isFood =
+                type !== CELL_TYPE.SNAKE && food?.[0] === rowIndex && food[1] === colIndex;
 
-                if (isFood) type = CELL_TYPE.FOOD;
+              if (isFood) type = CELL_TYPE.FOOD;
 
-                return <Cell key={colIndex} type={type} />;
-              })}
-            </div>
-          );
-        })}
-      </div>
-    </>
+              return <Cell key={colIndex} type={type} />;
+            })}
+          </div>
+        );
+      })}
+    </div>
   );
 };

@@ -7,8 +7,8 @@ export enum CELL_TYPE {
 export type Position = [number, number];
 
 export enum DIRECTION {
-  UP = 'up',
-  RIGHT = 'right',
-  DOWN = 'down',
-  LEFT = 'left',
+  UP = 'Up',
+  RIGHT = 'Right',
+  DOWN = 'Down',
+  LEFT = 'Left',
 }

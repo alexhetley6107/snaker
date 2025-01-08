@@ -1,14 +1,24 @@
 import { FC, useEffect, useState } from 'react';
 import { DIRECTION } from '../../types';
-import { MOVES } from '../../constants';
+import { MOVES, OPPOSITE_DIRECTIONS } from '../../constants';
 import { Board } from '../Board';
 
-export const Game: FC = () => {
+type Props = {
+  score: number;
+  addPoint: () => void;
+  stopGame: () => void;
+};
+
+export const Game: FC<Props> = ({ score, addPoint, stopGame }) => {
   const [direction, setDirection] = useState<DIRECTION>(DIRECTION.UP);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     const dir = MOVES[e.code as keyof typeof MOVES];
-    if (dir) setDirection(dir);
+    if (!dir) return;
+
+    setDirection((d) => {
+      return dir === OPPOSITE_DIRECTIONS[d] ? d : dir;
+    });
   };
 
   useEffect(() => {
@@ -18,5 +28,10 @@ export const Game: FC = () => {
     };
   }, []);
 
-  return <Board direction={direction} />;
+  return (
+    <>
+      {score}
+      <Board direction={direction} addPoint={addPoint} stopGame={stopGame} />
+    </>
+  );
 };
