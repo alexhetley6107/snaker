@@ -1,29 +1,20 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import s from './Board.module.css';
-import { BOARD_SIZE, DEFAULT_CELLS, initialSnake, MOVES } from '../../constants';
-import { Cell } from '../Cell/Cell';
-import { CELL_TYPE, Position } from '../../types';
+import { BOARD_SIZE, DEFAULT_CELLS, initialSnake, SPEED } from '../../constants';
+import { Cell } from '../Cell';
+import { CELL_TYPE, DIRECTION, Position } from '../../types';
 
-const speed = 300;
+type Props = {
+  direction: DIRECTION;
+};
 
-export const Board = () => {
-  const [direction, setDirection] = useState(MOVES[0]);
+export const Board: FC<Props> = ({ direction }) => {
   const [snake, setSnake] = useState<Position[]>(initialSnake);
   const [food, setFood] = useState<Position | null>(null);
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    const index = MOVES.indexOf(e.key);
-    if (index > -1) {
-      setDirection(MOVES[index]);
-    }
-  };
-
   useEffect(() => {
     generateFood();
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -55,16 +46,16 @@ export const Board = () => {
       const newSnake = snake;
       let move = [0, 0];
       switch (direction) {
-        case MOVES[0]:
+        case DIRECTION.UP:
           move = [0, -1];
           break;
-        case MOVES[1]:
+        case DIRECTION.RIGHT:
           move = [1, 0];
           break;
-        case MOVES[2]:
+        case DIRECTION.DOWN:
           move = [0, 1];
           break;
-        case MOVES[3]:
+        case DIRECTION.LEFT:
           move = [-1, 0];
           break;
       }
@@ -85,7 +76,7 @@ export const Board = () => {
       }
 
       setSnake(newSnake.splice(spliceIndex));
-    }, speed);
+    }, SPEED);
 
     return timerId;
   };

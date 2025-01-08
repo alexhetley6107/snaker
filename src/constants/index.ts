@@ -1,12 +1,22 @@
-import { Position } from '../types';
+import { DIRECTION, Position } from '../types';
+
+export const SPEED = 300;
 
 export const BOARD_SIZE = 20;
 export const DEFAULT_CELLS: number[][] = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(0));
 
-export const MOVES = ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'];
-
 export const initialSnake: Position[] = [
   [10, 10],
   [10, 11],
-  [10, 12],
 ];
+
+export const MOVES = {
+  ArrowUp: DIRECTION.UP,
+  ArrowRight: DIRECTION.RIGHT,
+  ArrowDown: DIRECTION.DOWN,
+  ArrowLeft: DIRECTION.LEFT,
+  KeyW: DIRECTION.UP,
+  KeyD: DIRECTION.RIGHT,
+  KeyS: DIRECTION.DOWN,
+  KeyA: DIRECTION.LEFT,
+};
