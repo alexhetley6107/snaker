@@ -10,7 +10,7 @@ type Props = {
   stopGame: () => void;
 };
 
-export const Board: FC<Props> = ({ direction, addPoint }) => {
+export const Board: FC<Props> = ({ direction, addPoint, stopGame }) => {
   const [snake, setSnake] = useState<Position[]>(initialSnake);
   const [food, setFood] = useState<Position | null>(null);
 
@@ -25,10 +25,12 @@ export const Board: FC<Props> = ({ direction, addPoint }) => {
     // eslint-disable-next-line
   }, [snake]);
 
-  const checkAvailableCell = (value: number) => {
-    if (value < 0) return BOARD_SIZE - 1;
-    if (value >= BOARD_SIZE) return 0;
-    return value;
+  const checkBorderOutCell = (pos: Position) => {
+    return pos[0] < 0 || pos[0] >= BOARD_SIZE || pos[1] < 0 || pos[1] >= BOARD_SIZE;
+  };
+
+  const checkSnakeCollision = (pos: Position, snake: Position[]) => {
+    return snake.some((c) => c[0] === pos[0] && c[1] === pos[1]);
   };
 
   const generateFood = () => {
@@ -62,16 +64,24 @@ export const Board: FC<Props> = ({ direction, addPoint }) => {
           break;
       }
 
-      const head: Position = [
-        checkAvailableCell(newSnake[newSnake.length - 1][0] + move[0]),
-        checkAvailableCell(newSnake[newSnake.length - 1][1] + move[1]),
+      const nextPos: Position = [
+        newSnake[newSnake.length - 1][0] + move[0],
+        newSnake[newSnake.length - 1][1] + move[1],
       ];
 
-      newSnake.push(head);
+      const isOut = checkBorderOutCell(nextPos);
+      const isCollision = checkSnakeCollision(nextPos, newSnake);
+
+      if (isOut || isCollision) {
+        stopGame();
+        return;
+      }
+
+      newSnake.push(nextPos);
 
       let spliceIndex = 1;
 
-      const isEating = head[0] === food?.[0] && head[1] === food[1];
+      const isEating = nextPos[0] === food?.[0] && nextPos[1] === food[1];
       if (isEating) {
         spliceIndex = 0;
         generateFood();
@@ -96,7 +106,6 @@ export const Board: FC<Props> = ({ direction, addPoint }) => {
 
               const isFood =
                 type !== CELL_TYPE.SNAKE && food?.[0] === rowIndex && food[1] === colIndex;
-
               if (isFood) type = CELL_TYPE.FOOD;
 
               return <Cell key={colIndex} type={type} />;
