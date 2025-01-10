@@ -1,16 +1,17 @@
 .cell {
   width: 20px;
   height: 20px;
+  transition: all 0.2s ease-in-out;
 }
 
 .empty {
-  background-color: grey;
+  background-color: var(--board-color);
 }
 
 .snake {
-  background-color: lightgreen;
+  background-color: var(--snake-color);
 }
 
 .food {
-  background-color: red;
+  background-color: var(--food-color);
 }

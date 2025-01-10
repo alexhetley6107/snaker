@@ -3,6 +3,7 @@ import { DIRECTION } from '../../types';
 import { MOVES, OPPOSITE_DIRECTIONS } from '../../constants';
 import { Board } from '../Board';
 import { DirectionArrows } from '../DirectionArrows';
+import s from './Game.module.css';
 
 type Props = {
   score: number;
@@ -34,10 +35,10 @@ export const Game: FC<Props> = ({ score, addPoint, stopGame }) => {
   }, []);
 
   return (
-    <>
+    <div className={s.game}>
       {score}
       <Board direction={direction} addPoint={addPoint} stopGame={stopGame} />
       <DirectionArrows direction={direction} setDirection={changeDirection} />
-    </>
+    </div>
   );
 };
