@@ -7,3 +7,15 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.container {
+}
+.score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score h2 {
+  margin-block: 1px;
+}

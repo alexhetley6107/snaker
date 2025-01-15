@@ -36,9 +36,14 @@ export const Game: FC<Props> = ({ score, addPoint, stopGame }) => {
 
   return (
     <div className={s.game}>
-      {score}
-      <Board direction={direction} addPoint={addPoint} stopGame={stopGame} />
-      <DirectionArrows direction={direction} setDirection={changeDirection} />
+      <div className={s.container}>
+        <div className={s.score}>
+          <h2>SNAKER</h2>
+          <h2>{score}</h2>
+        </div>
+        <Board direction={direction} addPoint={addPoint} stopGame={stopGame} />
+        <DirectionArrows direction={direction} setDirection={changeDirection} />
+      </div>
     </div>
   );
 };

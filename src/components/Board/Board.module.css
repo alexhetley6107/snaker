@@ -1,7 +1,8 @@
 .board {
-  padding: 1rem;
+  width: 73vmin;
+  display: flex;
 }
 
-.row {
-  display: flex;
+.column {
+  width: 5%;
 }

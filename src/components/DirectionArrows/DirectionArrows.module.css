@@ -1,4 +1,42 @@
 .arrows {
   display: flex;
   gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.arrows button {
+  display: block;
+  border: none;
+  background-color: var(--light-color);
+  height: 7vmin;
+  width: 40%;
+  cursor: pointer;
+}
+
+.centered {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 50%;
+}
+.centered > button {
+  width: 100%;
+}
+
+img {
+  aspect-ratio: 1/1;
+  height: 100%;
+}
+
+.up img {
+  transform: rotate(180deg);
+}
+
+.right img {
+  transform: rotate(-90deg);
+}
+
+.left img {
+  transform: rotate(90deg);
 }
