@@ -1,6 +1,6 @@
 import { DIRECTION, Position } from '../types';
 
-export const SPEED = 300;
+export const SPEED = 500;
 
 export const BOARD_SIZE = 20;
 export const DEFAULT_CELLS: number[][] = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(0));

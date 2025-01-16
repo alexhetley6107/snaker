@@ -1,6 +1,12 @@
 .board {
-  width: 73vmin;
+  width: 70vmin;
   display: flex;
+}
+
+@media (max-width: 652px) {
+  .board {
+    width: 90vmin;
+  }
 }
 
 .column {

@@ -42,8 +42,8 @@ export const Game: FC<Props> = ({ score, addPoint, stopGame }) => {
           <h2>{score}</h2>
         </div>
         <Board direction={direction} addPoint={addPoint} stopGame={stopGame} />
-        <DirectionArrows direction={direction} setDirection={changeDirection} />
       </div>
+      <DirectionArrows direction={direction} setDirection={changeDirection} />
     </div>
   );
 };

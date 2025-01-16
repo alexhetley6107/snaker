@@ -9,9 +9,13 @@
   display: block;
   border: none;
   background-color: var(--light-color);
-  height: 7vmin;
+  height: 70px;
   width: 40%;
   cursor: pointer;
+}
+
+.arrows button.active {
+  background-color: var(--snake-color);
 }
 
 .centered {
